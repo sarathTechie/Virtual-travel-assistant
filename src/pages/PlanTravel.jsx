@@ -3,7 +3,6 @@ import { useState } from "react";
 
 export default function PlanTravel() {
   const navigate = useNavigate();
-
   const [location, setLocation] = useState("");
   const [radius, setRadius] = useState("");
   const [days, setDays] = useState("");
@@ -11,8 +10,9 @@ export default function PlanTravel() {
   const [currency, setCurrency] = useState("");
   const [tripType, setTripType] = useState("");
 
-  function handleSubmit() {
-    // SAVE DATA FOR MAP + ITINERARY
+  function handleSubmit(e) {
+    e.preventDefault();
+
     localStorage.setItem(
       "planTravelData",
       JSON.stringify({
@@ -21,7 +21,7 @@ export default function PlanTravel() {
         days: Number(days),
         budget,
         currency,
-        tripType
+        tripType,
       })
     );
 
@@ -29,54 +29,73 @@ export default function PlanTravel() {
   }
 
   return (
-    <div className="form-container">
-      <h2>Plan Your Travel</h2>
+    <div className="form-wrapper">
+      <div className="form-container">
+        <h2>🌍 Discover Places</h2>
+        <p className="form-subtitle">Explore destinations based on your preferences</p>
 
-      <div className="form-grid">
-        <input
-          placeholder="Starting Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
+        <form onSubmit={handleSubmit} className="form-grid">
+          <input
+            type="text"
+            placeholder="Starting Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
+          />
 
-        <input
-          placeholder="Search Radius (km)"
-          value={radius}
-          onChange={(e) => setRadius(e.target.value)}
-        />
+          <input
+            type="number"
+            placeholder="Search Radius (km)"
+            value={radius}
+            onChange={(e) => setRadius(e.target.value)}
+            required
+          />
 
-        <input
-          placeholder="Trip Duration (days)"
-          value={days}
-          onChange={(e) => setDays(e.target.value)}
-        />
+          <input
+            type="number"
+            placeholder="Trip Duration (days)"
+            value={days}
+            onChange={(e) => setDays(e.target.value)}
+            required
+          />
 
-        <input
-          placeholder="Budget"
-          value={budget}
-          onChange={(e) => setBudget(e.target.value)}
-        />
+          <input
+            type="number"
+            placeholder="Budget"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+            required
+          />
 
-        <select onChange={(e) => setCurrency(e.target.value)}>
-          <option value="">Currency</option>
-          <option>INR</option>
-          <option>USD</option>
-          <option>EUR</option>
-        </select>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            required
+          >
+            <option value="">Select Currency</option>
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+          </select>
 
-        <select onChange={(e) => setTripType(e.target.value)}>
-          <option value="">Trip Type</option>
-          <option>Family</option>
-          <option>Solo</option>
-          <option>Couple</option>
-          <option>Friends</option>
-        </select>
-      </div>
+          <select
+            value={tripType}
+            onChange={(e) => setTripType(e.target.value)}
+            required
+          >
+            <option value="">Select Trip Type</option>
+            <option value="Family">Family</option>
+            <option value="Solo">Solo</option>
+            <option value="Couple">Couple</option>
+            <option value="Friends">Friends</option>
+          </select>
 
-      <div className="form-actions">
-        <button className="primary-btn" onClick={handleSubmit}>
-          Show Map
-        </button>
+          <div className="form-actions">
+            <button type="submit">
+              Show Map
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

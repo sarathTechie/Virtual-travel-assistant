@@ -1,33 +1,39 @@
 import { useNavigate } from "react-router-dom";
 
 export default function ModeSelect() {
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   return (
-    <div className="mode-container">
+    <div className="form-wrapper">
+      <div className="mode-container">
+        <div
+          className="mode-card"
+          onClick={() => navigate("/fixed")}
+        >
+          <h2>📍 Fixed Destination</h2>
+          <p className="card-description">Choose your destination and plan accordingly</p>
+          <ul>
+            <li>✓ Choose destination</li>
+            <li>✓ Set budget & days</li>
+            <li>✓ Get perfect itinerary</li>
+          </ul>
+          <button className="card-btn">Select Plan</button>
+        </div>
 
-      <div className="mode-card" onClick={() => nav("/fixed")}>
-        <h2>Fixed Destination</h2>
-        <ul>
-          <li>✔ Perfect when you know where to go</li>
-          <li>✔ Enter destination & preferences</li>
-          <li>✔ 3–5 itinerary options</li>
-          <li>✔ Day-wise planning</li>
-          <li>✔ Budget breakdown</li>
-        </ul>
+        <div
+          className="mode-card"
+          onClick={() => navigate("/plan")}
+        >
+          <h2>🌍 Discover Places</h2>
+          <p className="card-description">Explore based on your preferences</p>
+          <ul>
+            <li>✓ No destination needed</li>
+            <li>✓ AI suggests places</li>
+            <li>✓ Explore via map</li>
+          </ul>
+          <button className="card-btn">Select Plan</button>
+        </div>
       </div>
-
-      <div className="mode-card" onClick={() => nav("/plan")}>
-        <h2>Plan Your Travel</h2>
-        <ul>
-          <li>✔ Discover places within radius</li>
-          <li>✔ Interactive map view</li>
-          <li>✔ Select destination visually</li>
-          <li>✔ Smart itinerary logic</li>
-          <li>✔ Flexible trip planning</li>
-        </ul>
-      </div>
-
     </div>
   );
 }

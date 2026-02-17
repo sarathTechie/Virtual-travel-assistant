@@ -5,8 +5,16 @@ export default function Landing() {
 
   return (
     <div className="landing">
-      <h1 className="glow-text">✈ PLAN YOUR TRAVEL ✈</h1>
-      <button className="primary-btn" onClick={() => navigate("/mode")}>
+      <div className="plane">✈</div>
+      
+      <h1 className="hero-title">✈ PLAN YOUR TRAVEL ✈</h1>
+      
+      <p className="subtitle">Your AI-powered virtual travel assistant</p>
+
+      <button
+        className="primary-btn"
+        onClick={() => navigate("/mode")}
+      >
         Start Planning
       </button>
     </div>
